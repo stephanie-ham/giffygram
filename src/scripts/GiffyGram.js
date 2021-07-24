@@ -1,5 +1,18 @@
+import { Footer } from "./nav/Footer.js"
+import { NavBar } from "./nav/Navbar.js"
+
 export const GiffyGram = () => {
 
     // Show main main UI
-    return `<h1>Giffygram</h1>`
+    return `
+        <section>
+        ${NavBar()}
+        </section>
+        <section>
+        ${Footer()}
+        </section>
+        
+    `
+    
+  
 }
