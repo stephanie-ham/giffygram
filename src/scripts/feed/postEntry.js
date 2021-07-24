@@ -14,7 +14,7 @@ applicationElement.addEventListener("click", clickEvent => {
         const title = document.querySelector("input[name='title']").value
         const url = document.querySelector("input[name='url']").value
         const description = document.querySelector("textarea[name='story']").value
-        const date = `${getMonth()}/${getDay()}/${getYear()}`
+        const date = new Date()
 
         const datatoSend = {
             title: title,
