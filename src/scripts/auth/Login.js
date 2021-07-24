@@ -5,6 +5,7 @@ document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
         let foundUser = null
         const userState = getUsers()
+        //array is not showing object
 
         const email = document.querySelector("input[name='email']").value
         const password = document.querySelector("input[name='password']").value
