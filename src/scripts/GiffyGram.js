@@ -8,10 +8,8 @@ import {PostList} from './feed/PostList.js'
 
 export const GiffyGram = () => {
 
-    return `<h1 class="">Giffygram</h1>
-
-    <button class="miniMode">Have a gif to post?</button>
-
+    return `
+    
     <section class="PostEntry"></section>
     
     <section class="giffygram__feed">
