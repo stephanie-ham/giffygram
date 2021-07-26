@@ -53,6 +53,16 @@
     flex-basis: 50%;
 }
 
+.post__title {
+    font-size: 2em;
+    margin: 1.5em 0 0.1em 0;
+    list-style-type: none;
+}
+
+li.post {
+    list-style-type: none;
+}
+
 .post__image {
     width: 100%;
 }
@@ -66,9 +76,27 @@
 .post__tagline {
     font-size: 1.0em;
     margin: 1em 0 0.5em 0;
+    line-height: 110%;
 }
 
 .post__remark {
-    font-size: 2em;
+    font-size: 1.0em;
     margin: 1em 0 0.5em 0;
+    line-height: 110%;
 }
+.favoriteButton {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0.5em 0.5em;
+    cursor: pointer;
+    background-color: none;
+    border: none;
+} 
+
+.favoriteButton.blankStar {
+    background: url("../images/favorite-star-blank.svg")
+} 
+
+.favoriteButton.yellowStar {
+    background: url("../images/favorite-star-yellow.svg")
+} 
