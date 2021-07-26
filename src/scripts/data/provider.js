@@ -28,7 +28,7 @@ export const createPost = (gifPost) => {
       body: JSON.stringify(gifPost)
     }
   
-    return fetch(`${API}/posts`, fetchOptions)
+    return fetch(`${apiURL}/posts`, fetchOptions)
     .then(response => response.json())
     .then(() => {
       mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
