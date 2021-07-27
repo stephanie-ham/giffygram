@@ -30,38 +30,11 @@ const findUserLikes = (user,  likes) => {
     if (user.id === like.userId) {
       userLike = like
     }
-
   return userLike
-
   }
-} /////// end function to find the gifs a user liked
-
-// const findChosenUser = (chosenUser, posts) => {
-
-//   // const giffygramUsers = getUsers()
-//   // const giffygramPosts = getPosts()
-
-//   for (const user of chosenUser) {
-//     if (user.id === userId) {
-      
-//       const filteredPosts = posts.filter(
-//         (post) => {
-//           if (post.userId === user.id) {
-//             window.alert(`this will filter to GIFs posted by ${giffygramUser.email}`)
-//             return giffygramPost
-//           }
-//         }
-//       )
-//       return filteredPosts //filtering but not re-rendering
-//     }
-//   }
-// }
-
+} 
 
 const findChosenUserPost = (user, posts) => {
-
-  // const giffygramUsers = getUsers()
-  // const giffygramPosts = getPosts()
 
       const filteredPosts = posts.filter(
         (post) => {
@@ -70,15 +43,10 @@ const findChosenUserPost = (user, posts) => {
           }
         }
       )
-      return filteredPosts //filtering but not re-rendering
+      return filteredPosts
 }
 
-
-
-
-
-///// const findChosenUser with below code
-
+/////// export function to push feed to GiffyGram.js
 export const PostList = () => {
 
   const giffygramUsers = getUsers()
@@ -86,14 +54,9 @@ export const PostList = () => {
   const giffygramLikes = getLikes()
   const giffygramChosenUser = getChosenUser()
 
-  /// invoke getChosenUser
-
-
   if (giffygramChosenUser) {
     giffygramPosts = findChosenUserPost(giffygramChosenUser, giffygramPosts)
   } 
-
-  //check if there's a chosen user then filter post
    
   let postHTML = ""
     postHTML += "<ul>"
@@ -101,7 +64,6 @@ export const PostList = () => {
     for (const giffygramPost of giffygramPosts) {
       const giffygramUser = findUser(giffygramPost, giffygramUsers)
       const giffygramLike = findUserLikes(giffygramUser, giffygramLikes)
-      // const foundChosenUser = findChosenUser(giffygramUsers, giffygramPosts) 
 
       postHTML += `<li>${Post(giffygramPost, giffygramUser)}</li>`
     } 
@@ -112,14 +74,7 @@ export const PostList = () => {
 
 } /////// end export function to push feed to GiffyGram.js
 
-
-///// start click event for user posts
-// -- steps to build this:
-// -- started with a click event matching the userId to the id on the HTML
-// -- coded to get the click event to work with a window.alert output
-// -- from there: added a giffygramPosts.filter
-// -- filter to match user.id to post
-// -- filter and window alert working, unsure how to render
+/////// click event to filter posts by user
 applicationElement.addEventListener("click", event => {
   if (event.target.id.startsWith("postedBy--")) {
 
@@ -127,14 +82,8 @@ applicationElement.addEventListener("click", event => {
 
     setChosenUser(parseInt(userId))
 
-    // set chosen user and render app
-
     applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
   }
-}) /////// end click event for user posts
+}) /////// end click event to filter posts by user
 
-
-/////// TO DO ///////
-// -- when clicked, giffygramUser should filter to only the gifs they posted -- //
-// -- favorite button should render as yellow start when selected -- //

@@ -1,8 +1,5 @@
 const apiURL = "http://localhost:8088"
 
-// const applicationElement = document.querySelector(".giffygram")
-
-
 const applicationState = {
     currentUser: {},
     feed: {
@@ -80,10 +77,6 @@ export const getChosenUser = () => {
     return applicationState.feed.chosenUser
 }
 
-// export const getChosenUser postList.js
-
-// const setChosenUser postList.js
-
 const applicationElement = document.querySelector(".giffygram")
 
 export const deletePost = (id) => {
@@ -94,8 +87,6 @@ export const deletePost = (id) => {
             }
         )
 }
-
-
 
 export const favoritePost = (userFavorite) => {
     const fetchOptions = {

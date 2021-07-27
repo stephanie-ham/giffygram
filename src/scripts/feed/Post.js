@@ -2,7 +2,6 @@ import { deletePost, favoritePost } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
-
 applicationElement.addEventListener("click", clickEvent => {
   
   if (clickEvent.target.id.startsWith("blockPost--")) {
@@ -28,8 +27,16 @@ applicationElement.addEventListener("click", clickEvent => {
    favoriteStar.classList.toggle("blankStar")
    favoriteStar.classList.toggle("yellowStar") // while paused, this toggles to yellowStar. Does not stick.
 
+   applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+
  }
 })
+
+const currentUser = parseInt(localStorage.getItem("gg_user"))
+
+  if (currentUser) {
+    
+  }
 
 
 // render page with stars already existing for liked, render with gold star
