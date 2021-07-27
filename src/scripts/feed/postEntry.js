@@ -13,14 +13,16 @@ applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "createPost") {
         const title = document.querySelector("input[name='title']").value
         const url = document.querySelector("input[name='url']").value
-        const description = document.querySelector("textarea[name='story']").value
+        const story = document.querySelector("textarea[name='story']").value
         const date = new Date()
-        
+        const userId = parseInt(localStorage.gg_user)
+
         const datatoSend = {
             title: title,
             url: url,
-            description: description,
-            date: date
+            story: story,
+            date: date,
+            userId: userId
         }
 
         createPost(datatoSend)
