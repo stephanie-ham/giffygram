@@ -23,18 +23,18 @@ const findUser = (post, users) => {
 
 /////// function to find the gifs a user liked
 /////// this can't run until likes has a userId linked
-const findUserLikes = (user,  likes) => {
-  let userLike = null
+// const findUserLikes = (user,  likes) => {
+//   let userLike = null
 
-  for (const like of likes) {
-    if (user.id === like.userId) {
-      userLike = like
-    }
+//   for (const like of likes) {
+//     if (user.id === like.userId) {
+//       userLike = like
+//     }
 
-  return userLike
+//   return userLike
 
-  }
-} /////// end function to find the gifs a user liked
+//   }
+// } /////// end function to find the gifs a user liked
 
 // const findChosenUser = (chosenUser, posts) => {
 
@@ -83,7 +83,7 @@ export const PostList = () => {
 
   const giffygramUsers = getUsers()
   let giffygramPosts = getPosts()
-  const giffygramLikes = getLikes()
+  // const giffygramLikes = getLikes()
   const giffygramChosenUser = getChosenUser()
 
   /// invoke getChosenUser
@@ -100,7 +100,7 @@ export const PostList = () => {
 
     for (const giffygramPost of giffygramPosts) {
       const giffygramUser = findUser(giffygramPost, giffygramUsers)
-      const giffygramLike = findUserLikes(giffygramUser, giffygramLikes)
+      // const giffygramLike = findUserLikes(giffygramUser, giffygramLikes)
       // const foundChosenUser = findChosenUser(giffygramUsers, giffygramPosts) 
 
       postHTML += `<li>${Post(giffygramPost, giffygramUser)}</li>`
