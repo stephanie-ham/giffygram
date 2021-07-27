@@ -23,9 +23,10 @@ const findUser = (post, users) => {
 
 /////// function to find the gifs a user liked
 /////// this can't run until likes has a userId linked
-const findUserLikes = (user,  likes) => {
-  let userLike = null
+// const findUserLikes = (user,  likes) => {
+//   let userLike = null
 
+<<<<<<< HEAD
   for (const like of likes) {
     if (user.id === like.userId) {
       userLike = like
@@ -33,6 +34,39 @@ const findUserLikes = (user,  likes) => {
   return userLike
   }
 } 
+=======
+//   for (const like of likes) {
+//     if (user.id === like.userId) {
+//       userLike = like
+//     }
+
+//   return userLike
+
+//   }
+// } /////// end function to find the gifs a user liked
+
+// const findChosenUser = (chosenUser, posts) => {
+
+//   // const giffygramUsers = getUsers()
+//   // const giffygramPosts = getPosts()
+
+//   for (const user of chosenUser) {
+//     if (user.id === userId) {
+      
+//       const filteredPosts = posts.filter(
+//         (post) => {
+//           if (post.userId === user.id) {
+//             window.alert(`this will filter to GIFs posted by ${giffygramUser.email}`)
+//             return giffygramPost
+//           }
+//         }
+//       )
+//       return filteredPosts //filtering but not re-rendering
+//     }
+//   }
+// }
+
+>>>>>>> 40a0df8af449d1dd083cb347545bd2522e7e8eb1
 
 const findChosenUserPost = (user, posts) => {
 
@@ -51,7 +85,7 @@ export const PostList = () => {
 
   const giffygramUsers = getUsers()
   let giffygramPosts = getPosts()
-  const giffygramLikes = getLikes()
+  // const giffygramLikes = getLikes()
   const giffygramChosenUser = getChosenUser()
 
   if (giffygramChosenUser) {
@@ -63,7 +97,12 @@ export const PostList = () => {
 
     for (const giffygramPost of giffygramPosts) {
       const giffygramUser = findUser(giffygramPost, giffygramUsers)
+<<<<<<< HEAD
       const giffygramLike = findUserLikes(giffygramUser, giffygramLikes)
+=======
+      // const giffygramLike = findUserLikes(giffygramUser, giffygramLikes)
+      // const foundChosenUser = findChosenUser(giffygramUsers, giffygramPosts) 
+>>>>>>> 40a0df8af449d1dd083cb347545bd2522e7e8eb1
 
       postHTML += `<li>${Post(giffygramPost, giffygramUser)}</li>`
     } 

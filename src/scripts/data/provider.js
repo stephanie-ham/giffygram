@@ -1,17 +1,38 @@
 const apiURL = "http://localhost:8088"
 
+const applicationElement = document.querySelector(".giffygram")
+
 const applicationState = {
     currentUser: {},
     feed: {
         chosenUser: null,
         displayFavorites: false,
-        displayMessages: false
+        displayMessages: false,
+        displayGifButton: true,
+        displayGifForm: false
     },
     users: [],
     likes: [],
     messages: [],
     posts: []
 }
+
+export const createPost = (gifPost) => {
+
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(gifPost)
+    }
+  
+    return fetch(`${apiURL}/posts`, fetchOptions)
+    .then(response => response.json())
+    .then(() => {
+      applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    })
+  }
 
 export const fetchUsers = () => {
     return fetch(`${apiURL}/users`)
@@ -73,11 +94,17 @@ export const getPosts = () => {
     return applicationState.posts.map(post=>({...post}))
 }
 
+export const getGifFormDisplayStatus = () => {
+    return applicationState.feed.displayGifForm
+}
+
+export const setGifFormDisplayStatus = (status) => {
+    applicationState.feed.displayGifForm = status
+}
+
 export const getChosenUser = () => {
     return applicationState.feed.chosenUser
 }
-
-const applicationElement = document.querySelector(".giffygram")
 
 export const deletePost = (id) => {
     return fetch(`${apiURL}/posts/${id}`, { method: "DELETE" })

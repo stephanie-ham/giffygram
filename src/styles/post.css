@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+.postEntry {
+    margin: 7rem 0;
+}
+
 .newPost {
     margin: 0 25%;
 }
