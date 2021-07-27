@@ -75,6 +75,10 @@ export const fetchPosts = () => {
     )
 }
 
+export const setChosenUser = (id) => {
+    applicationState.feed.chosenUser = id
+}
+
 export const getUsers = () => {
     return applicationState.users.map(user=>({...user}))
 }
@@ -97,4 +101,33 @@ export const getGifFormDisplayStatus = () => {
 
 export const setGifFormDisplayStatus = (status) => {
     applicationState.feed.displayGifForm = status
+}
+
+export const getChosenUser = () => {
+    return applicationState.feed.chosenUser
+}
+
+export const deletePost = (id) => {
+    return fetch(`${apiURL}/posts/${id}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const favoritePost = (userFavorite) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userFavorite)
+    }
+
+    return fetch(`${apiURL}/likes`, fetchOptions)
+        .then(favorite => favorite.json())
+        .then(() => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+         })
 }
