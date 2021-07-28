@@ -1,4 +1,4 @@
-import { renderApp } from "../main.js"
+import { resetAppState } from "../provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -6,10 +6,9 @@ applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id ==="logout") {
         localStorage.removeItem("gg_user")
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
-    }
-    else if (clickEvent.target.name ==="home") {
-        // document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
-        renderApp()
+    } else if (clickEvent.target.id ==="homeReturn") {
+        
+        resetAppState()
      }
 
 
@@ -19,8 +18,8 @@ applicationElement.addEventListener("click", clickEvent => {
 export const NavBar = () => {
     return `
         <div class="navigation" id="directMessageIcon">
-            <div class="navigation__icon" name="home" >
-                <img class="navigation__icon" src="images/pb.png" alt="icon">
+            <div class="navigation__icon" >
+                <img class="navigation__icon" src="images/pb.png" alt="icon" id="homeReturn">
             </div>
             <div class="navigation__name">Giffygram</div>
             
@@ -35,8 +34,3 @@ export const NavBar = () => {
     ` 
 }
 
-/* <div class="navigation__message"></div> */
-
-// #directMessageIcon {
-//     cursor: pointer;
-// }

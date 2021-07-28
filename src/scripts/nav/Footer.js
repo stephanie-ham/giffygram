@@ -1,5 +1,4 @@
-import {Post} from "../feed/Post.js"
-import {getLikes, getPosts, getUsers, getChosenUser, setChosenUser} from '../data/provider.js'
+import { getUsers, getChosenUser, setChosenUser} from '../data/provider.js'
 
 const applicationElement = document.querySelector(".giffygram")
 
