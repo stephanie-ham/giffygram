@@ -10,6 +10,13 @@ applicationElement.addEventListener("click", clickEvent => {
 })
 
 applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "cancelForm") {
+        setGifFormDisplayStatus(false)
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "createPost") {
         const title = document.querySelector("input[name='title']").value
         const url = document.querySelector("input[name='url']").value
@@ -56,7 +63,7 @@ export const postEntryForm = () => {
 
         <div class="newPost_upload">
             <input class="" id="createPost" type="button" value="Save">
-            <input class="" type="button" value="Cancel">
+            <input class="" id="cancelForm" type="button" value="Cancel">
         </div>
     </div>
     `
