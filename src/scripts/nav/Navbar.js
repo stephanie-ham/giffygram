@@ -1,4 +1,4 @@
-import { resetAppState } from "../provider.js"
+import { resetAppState } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -7,8 +7,8 @@ applicationElement.addEventListener("click", clickEvent => {
         localStorage.removeItem("gg_user")
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     } else if (clickEvent.target.id ==="homeReturn") {
-        
         resetAppState()
+        
      }
 
 

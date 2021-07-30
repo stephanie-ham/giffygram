@@ -1,4 +1,4 @@
-const apiURL = "http://localhost:8089"
+const apiURL = "http://localhost:8088"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -18,13 +18,13 @@ const applicationState = {
     posts: []
 }
 
-// export const resetAppState = () => {
-//     applicationState.feed.chosenUser = null,
-//     applicationState.feed.displayFavorites = false,
-//     applicationState.feed.displayMessages = false,
-//     applicationState.feed.displayGifButton = true,
-//     applicationState.feed.displayGifForm = false
-// }
+export const resetAppState = () => {
+    applicationState.feed.chosenUser = null
+    applicationState.feed.displayFavorites = false
+    applicationState.feed.displayMessages = false
+    applicationState.feed.displayGifButton = true
+    applicationState.feed.displayGifForm = false
+}
 
 
 export const createPost = (gifPost) => {
