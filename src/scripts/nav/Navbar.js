@@ -1,4 +1,5 @@
 import { resetAppState } from "../data/provider.js"
+import { renderApp } from "../main.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -8,7 +9,7 @@ applicationElement.addEventListener("click", clickEvent => {
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     } else if (clickEvent.target.id ==="homeReturn") {
         resetAppState()
-        
+        renderApp()
      }
 
 
