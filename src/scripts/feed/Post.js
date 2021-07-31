@@ -1,46 +1,74 @@
-import { deletePost, favoritePost } from "../data/provider.js"
+import { deletePost, favoritePost, getLikes, unfavoritePost } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
-
-applicationElement.addEventListener("click", clickEvent => {
+applicationElement.addEventListener("click", clickEvent => { ////// start click event
   
-  if (clickEvent.target.id.startsWith("blockPost--")) {
+  if (clickEvent.target.id.startsWith("blockPost--")) { // start delete
     const [, postId] = clickEvent.target.id.split("--")
     deletePost(parseInt(postId))
-  }
+  } // end delete
   
-  if (clickEvent.target.id.startsWith("favorite--")) {
+  if (clickEvent.target.id.startsWith("unfavorite--")) { // start favorite
 
     const [, postId] = clickEvent.target.id.split("--")
-   // const userId = document.querySelector(".favoriteButton").value
+    const currentUser = parseInt(localStorage.getItem("gg_user"))
    
-   const data = { ////// need to figure out how to push a userId
-     postId: parseInt(postId)
-   }
-   
-   favoritePost(data)
+    const data = { ////// need to figure out how to push a userId
+      postId: parseInt(postId),
+      userId: currentUser
+    }
+    
+    favoritePost(data)
 
-   window.alert(`function is running`)
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+ } // end unfavorite
 
-   const favoriteStar = clickEvent.target
+  if (clickEvent.target.id.startsWith("favorite--")) { // start unfavorite
 
-   favoriteStar.classList.toggle("blankStar")
-   favoriteStar.classList.toggle("yellowStar") // while paused, this toggles to yellowStar. Does not stick.
+    const [, postId] = clickEvent.target.id.split("--")
 
- }
-})
+    const likeId = findLikeId(parseInt(postId))
 
+    if (likeId) {
+      unfavoritePost(likeId)
+    }
+  } // end unfavorite
+}) ////// end click event
 
-// render page with stars already existing for liked, render with gold star
-// toggle star: save or delete like if liked already, fetch to delete. if didn't like already, post to like the like
-// after, state change
+////// function to see if currentUser has liked a post, allows yellow star to render
+const userLikesPost = (postId) => {
+  const giffygramLikes = getLikes()
+  const currentUser = parseInt(localStorage.getItem("gg_user"))
 
+  let doesLike = false
 
+  for (const like of giffygramLikes) {
+    if (postId === like.postId && currentUser === like.userId) {
+      doesLike = true
+    } 
+  }
+  return doesLike
+} ////// end function to see if currentUser has liked a post, allows yellow star to render
+
+////// function to find like.id in order to unfavorite post in API and render back to blank star
+const findLikeId = (postId) => {
+  const giffygramLikes = getLikes()
+  const currentUser = parseInt(localStorage.getItem("gg_user"))
+
+  let id = null
+
+  for (const like of giffygramLikes) {
+    if (postId === like.postId && currentUser === like.userId) {
+      id = like.id
+    } 
+  }
+  return id
+} ////// end function to find like.id in order to unfavorite post in API and render back to blank star
 
 export const Post = (post, user) => {
 
-  const postListElement = `
+  let postListElement = `
     <li id="post--${post.id}" class="post">
       <h2 class="post__title">${post.title}</h2>
       <br>
@@ -50,20 +78,17 @@ export const Post = (post, user) => {
       <br>
       <body class="post__remark">Posted by <a id="postedBy--${user.id}" class="fakeLink" "value="postedBy">${user.email}</a> on ${post.date}</body>
       <br>
-      <section class="post__actions">
-        <input type="submit" id="favorite--${post.id}" class="actionIcon favoriteButton blankStar" value=""/>
-        <img id="blockPost--${post.id}" class="actionIcon" src="../images/block.svg"/>
+      <section class="post__actions">`
+
+      if (userLikesPost(post.id)) {
+        postListElement += `<input type="submit" id="favorite--${post.id}" class="actionIcon favoriteButton yellowStar" value=""/>`
+      } else {
+        postListElement += `<input type="submit" id="unfavorite--${post.id}" class="actionIcon favoriteButton blankStar" value=""/>`
+      }
+      
+      postListElement +=  `<img id="blockPost--${post.id}" class="actionIcon" src="../images/block.svg"/>
       </section>
     </li>
   `
   return postListElement
 } 
-
-
-
-
-/////// TO DO ///////
-// -- delete button should only render if active user is the poster -- //
-// -- favorite button should render as yellow star when selected -- //
-// -- push a userId to likes -- //
-
