@@ -74,6 +74,10 @@ export const fetchPosts = () => {
     )
 }
 
+export const setDisplayFavorites = (id) => {
+    applicationState.feed.displayFavorites = id
+}
+
 export const setChosenUser = (id) => {
     applicationState.feed.chosenUser = id
 }
@@ -106,8 +110,21 @@ export const getChosenUser = () => {
     return applicationState.feed.chosenUser
 }
 
+export const getDisplayFavorites = () => {
+    return applicationState.feed.displayFavorites
+}
+
 export const deletePost = (id) => {
     return fetch(`${apiURL}/posts/${id}`, { method: "DELETE" })
+        .then(
+            () => {
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const unfavoritePost = (id) => {
+    return fetch(`${apiURL}/likes/${id}`, { method: "DELETE" })
         .then(
             () => {
                 applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
