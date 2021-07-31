@@ -1,4 +1,5 @@
-import { getUsers } from "../data/provider.js"
+import {Post} from "../feed/Post.js"
+import {getLikes, getPosts, getUsers, getChosenUser, setChosenUser} from '../data/provider.js'
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -16,9 +17,9 @@ export const FooterMap = () => {
                 <option value="2017">2017</option>
             </select>
         </div>
-        <div class="footer__item" id="Users">
+        <div class="footer__item">
             <label for="userChoice">Posts by User </label>
-            <select name="userChoice" id="users">
+            <select name="userChoice" id="userChoice">
                 ${
                     users.map((user) => userFilter(user)).join("")
                 }
@@ -34,12 +35,36 @@ export const FooterMap = () => {
 }
 
 const userFilter = (user) => {
-    return ` 
-        <option value="${user.name}">
-            ${user.name}
-        </option>       
-    `
+    if ( user.id === getChosenUser() ) { 
+        return ` 
+            <option value="${user.name}" id="userID__${user.id}" selected>
+                ${user.name}
+            </option>       
+        `
+    } else {
+        return ` 
+            <option value="${user.name}" id="userID__${user.id}">
+                ${user.name}
+            </option>       
+        `
+    }
 }
+  
 
-// applicationElement.addEventListener("change")
+  
+  applicationElement.addEventListener('change', event => {
+    if (event.target.id==="userChoice") {
+    
+        //Create Index
+        const userIndex = event.target.options.selectedIndex
+        const finalID = event.target.options[userIndex].id
 
+      const [, userId] = finalID.split("__")
+  
+      setChosenUser(parseInt(userId))
+
+      applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+      // set chosen user and render app
+  
+    }
+  })
