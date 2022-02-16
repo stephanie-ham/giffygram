@@ -21,5 +21,4 @@ Open another terminal window and go to the `giffygram` directory.
 Login with the following mock credentials:
 
   email: ron@pawnee.com
-
   password: lagavulin
