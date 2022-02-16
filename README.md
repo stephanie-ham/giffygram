@@ -19,5 +19,7 @@ Open another terminal window and go to the `giffygram` directory.
 ### Login
 
 Login with the following mock credentials:
-*email* ron@pawnee.com
-*password* lagavulin
+
+email: ron@pawnee.com
+
+password: lagavulin
